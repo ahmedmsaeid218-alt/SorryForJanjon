@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سؤال مهم لجنجون</title>
+    
+    <!-- استدعاء خط Cairo الاحترافي من جوجل -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffe6e6; /* لون خلفية وردي فاتح */
+            font-family: 'Cairo', sans-serif; /* تطبيق الخط الجديد */
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 90%;
+        }
+        .emoji {
+            font-size: 100px;
+            margin: 0;
+            line-height: 1;
+        }
+        h1 {
+            color: #ff4d4d;
+            margin-top: 20px;
+            font-weight: 700;
+        }
+        .btn-group {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        button {
+            font-family: 'Cairo', sans-serif;
+            font-size: 18px;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        #forgiveBtn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        #forgiveBtn:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+        #madBtn {
+            background-color: #ff4d4d;
+            color: white;
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <p class="emoji" id="emoji">🥺</p>
+        <h1 id="question">يا جنجون بيه، لسه زعلانة مني؟</h1>
+        <div class="btn-group" id="btnGroup">
+            <button id="forgiveBtn">خلاص سامحتك ❤️</button>
+            <button id="madBtn">أيوة لسه زعلانة </button>
+        </div>
+    </div>
+
+    <script>
+        const question = document.getElementById("question");
+        const emoji = document.getElementById("emoji");
+        const forgiveBtn = document.getElementById("forgiveBtn");
+        const madBtn = document.getElementById("madBtn");
+        const btnGroup = document.getElementById("btnGroup");
+
+        let madClickCount = 0;
+
+        // لما تضغط على زرار المسامحة
+        forgiveBtn.addEventListener("click", () => {
+            question.innerHTML = "الحمد لله كنت عارف ان قلبك ابيضضضض🥰";
+            emoji.innerHTML = "❤️";
+            btnGroup.style.display = "none";
+        });
+
+        // لما تضغط على زرار الزعل
+        madBtn.addEventListener("click", () => {
+            madClickCount++;
+
+            if (madClickCount === 1) {
+                question.innerHTML = "متأكدة يا جنجون؟ طب عشان خاطري؟ 🥺";
+                emoji.innerHTML = "😢";
+                madBtn.innerHTML = "أيوة لسه زعلانة";
+            } else if (madClickCount === 2) {
+                question.innerHTML = "فكري تاني! فرصة أخيرة! 🙏";
+                emoji.innerHTML = "😭";
+                madBtn.innerHTML = "برضو زعلانة";
+            } else if (madClickCount === 3) {
+                question.innerHTML = "طيب، إنتي اللي اضطريتيني لكده يا جنجون 😎";
+                emoji.innerHTML = "😈";
+                madBtn.innerHTML = "حاولي تمسكيني بقى!";
+                
+                // تحويل الزرار لـ Absolute عشان يهرب
+                madBtn.style.position = "absolute";
+            }
+        });
+
+        // حركة الهروب لزرار الزعل
+        madBtn.addEventListener("mouseover", () => {
+            if (madClickCount >= 3) {
+                const x = Math.random() * (window.innerWidth - madBtn.offsetWidth);
+                const y = Math.random() * (window.innerHeight - madBtn.offsetHeight);
+                
+                madBtn.style.left = `${x}px`;
+                madBtn.style.top = `${y}px`;
+            }
+        });
+    </script>
+</body>
+</html>
